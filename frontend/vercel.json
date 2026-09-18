@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://backend-sigalon.fastapicloud.dev/$1" },
+    { "source": "/api/(.*)", "destination": "https://backend-sigalon-6b4fafc9.fastapicloud.dev/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
