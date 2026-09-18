@@ -1,0 +1,26 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+# Menyediakan perintah `fastapi run`. Tidak dipakai saat ngoding — di sini
+# uvicorn dipanggil langsung — tapi WAJIB ada di server: FastAPI Cloud
+# menyalakan aplikasi lewat perintah itu, dan tanpa paket ini prosesnya mati
+# sebelum menyentuh database, dengan pesan yang tidak menyebut-nyebut deploy.
+fastapi-cli==0.0.32
+bcrypt==4.2.0
+pydantic-settings==2.6.1
+# Dipakai impor data kependudukan & ekspor Excel. Bukan cuma
+# perkakas: mengisi data pertama kali TIDAK BISA tanpa ini.
+openpyxl==3.1.5
+
+# Penyaring HTML berita (pengikat Rust untuk ammonia). Batas kepercayaan,
+# bukan kenyamanan: isi berita dipasang ke `dangerouslySetInnerHTML` di halaman
+# publik, jadi yang tersimpan harus sudah bersih. Lihat `app/schemas/berita.py`.
+nh3==0.3.7
+
+# Pemrosesan dan kompresi gambar/foto berita ke webp di disk server
+Pillow>=10.0.0
+
+
+# Turso — SQLite yang sama, filenya saja yang tinggal di cloud. Dipakai HANYA
+# kalau `TURSO_*` di `.env` diisi; tanpa itu backend tetap memakai `sqlite3`
+# stdlib dan pustaka ini tidak pernah disentuh. Lihat `app/data/db.py`.
+libsql==0.1.11

@@ -1,0 +1,19 @@
+# Semua file teks disimpan LF di repo. Tanpa ini, Git for Windows (autocrlf=true)
+# menulis balik CRLF dan skrip .sh jadi gagal jalan di Git Bash/WSL/Linux
+# ("bash: \r: command not found").
+* text=auto eol=lf
+
+# Kecuali .bat: cmd.exe butuh CRLF, terutama untuk goto/label.
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+*.xlsx binary
+*.png binary
+*.jpg binary
+*.ico binary
+*.db binary
+*.sqlite binary
+*.sqlite3 binary
+*.webp binary
+*.jpeg binary
+

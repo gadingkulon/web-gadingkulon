@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Satu-satunya definisi ramp abu-abu; `tailwind.config.js` cuma menunjuk ke
+     variabel di sini (`rgb(var(--slate-500) / <alpha-value>)`), jadi kelas
+     seperti `text-slate-500` atau `bg-surface` ikut berganti begitu kelas
+     `dark` menempel di <html>. */
+  :root {
+    color-scheme: light;
+
+    --surface: 255 255 255;
+    --slate-50: 248 250 252;
+    --slate-100: 241 245 249;
+    --slate-200: 226 232 240;
+    --slate-300: 203 213 225;
+    --slate-400: 148 163 184;
+    --slate-500: 100 116 139;
+    --slate-600: 71 85 105;
+    --slate-700: 51 65 85;
+    --slate-800: 30 41 59;
+    --slate-900: 15 23 42;
+    --slate-950: 2 6 23;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+  }
+
+  /* Hilangkan outline atau ring bawaan browser pada elemen form */
+  input:focus,
+  input:focus-visible,
+  textarea:focus,
+  textarea:focus-visible,
+  select:focus,
+  select:focus-visible {
+    outline: none !important;
+    box-shadow: none;
+  }
+}
+
+@layer components {
+  /* Fokus ring konsisten untuk elemen interaktif. */
+  .focus-ring {
+    @apply outline-none ring-offset-1 focus-visible:ring-2 focus-visible:ring-slate-900/30;
+  }
+
+  /* Utilitas animasi hover modern & taktil */
+  .hover-lift {
+    @apply transition-all duration-150 ease-out hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:scale-[0.98] motion-reduce:transition-none motion-reduce:hover:translate-y-0;
+  }
+
+  .hover-card {
+    @apply transition-all duration-200 ease-out hover:-translate-y-1 hover:border-black hover:shadow-lg motion-reduce:transition-none motion-reduce:hover:translate-y-0;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-200 ease-out hover:scale-105 active:scale-95 motion-reduce:transition-none motion-reduce:hover:scale-100;
+  }
+
+  /* Scrollbar halus untuk kontainer tabel overflow */
+  .overflow-x-auto::-webkit-scrollbar {
+    height: 6px;
+  }
+  .overflow-x-auto::-webkit-scrollbar-track {
+    background: #f8fafc;
+  }
+  .overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+  }
+  .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
+
+/* Isi artikel berita.
+
+   Kotak editornya (`EditorIsiBerita`) dan halaman publiknya
+   (`BeritaDetailPage`) memakai kelas yang SAMA — itu satu-satunya cara "yang
+   ditulis = yang terbit" benar-benar berlaku, bukan sekadar mirip.
+
+   CSS biasa, bukan utilitas Tailwind: tag-tag ini tidak pernah muncul di
+   berkas sumber, ia lahir saat runtime dari string HTML, jadi tidak ada yang
+   bisa dipindai Tailwind. */
+.isi-berita {
+  color: rgb(var(--slate-900));
+}
+.isi-berita > * + * {
+  margin-top: 1rem;
+}
+.isi-berita p {
+  line-height: 1.75;
+  color: rgb(var(--slate-900));
+}
+.isi-berita h2 {
+  margin-top: 2rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: rgb(var(--slate-900));
+}
+.isi-berita h3 {
+  margin-top: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: rgb(var(--slate-900));
+}
+.isi-berita ul,
+.isi-berita ol {
+  padding-left: 1.5rem;
+  color: rgb(var(--slate-900));
+}
+.isi-berita ul {
+  list-style: disc;
+}
+.isi-berita ol {
+  list-style: decimal;
+}
+.isi-berita li + li {
+  margin-top: 0.25rem;
+}
+.isi-berita blockquote {
+  border-left: 3px solid #000000;
+  padding-left: 1rem;
+  font-style: italic;
+  color: rgb(var(--slate-800));
+}
+.isi-berita strong,
+.isi-berita b {
+  font-weight: 700;
+  color: #000000;
+}
+.isi-berita a {
+  color: rgb(var(--slate-900));
+  text-decoration: underline;
+  font-weight: 600;
+}
+.isi-berita a:hover {
+  color: #000000;
+}
+.isi-berita img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+.isi-berita code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875em;
+  color: rgb(var(--slate-900));
+}
+
+/* ==========================================================================
+   Animasi Scroll Fade Gaya Apple (Eksklusif Mobile < 1024px)
+   Elemen meluncur naik 60px, membesar (scale 0.92 -> 1.0), memudar masuk,
+   serta transisi blur-to-crisp yang sangat jelas & nyata terlihat saat di-scroll.
+   Desktop (>= 1024px) DIJAMIN 100% NORMAL & TIDAK TERPENGARUH.
+   ========================================================================== */
+@media (max-width: 1023px) {
+  [data-apple-fade] {
+    opacity: 0;
+    transform: translateY(60px) scale(0.92);
+    filter: blur(8px);
+    transition:
+      opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  [data-apple-fade].apple-fade-in,
+  [data-apple-fade][data-apple-revealed='true'] {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+
+  /* Setelah transisi selesai, bebaskan transform & filter GPU agar tidak memakan memori tile HP */
+  [data-apple-fade].apple-fade-done {
+    transform: none !important;
+    filter: none !important;
+    will-change: auto !important;
+  }
+
+  /* Efek beruntun (stagger delay ala Apple) */
+  [data-apple-delay='1'] {
+    transition-delay: 0.08s;
+  }
+  [data-apple-delay='2'] {
+    transition-delay: 0.16s;
+  }
+  [data-apple-delay='3'] {
+    transition-delay: 0.24s;
+  }
+  [data-apple-delay='4'] {
+    transition-delay: 0.32s;
+  }
+}
+
+/* Proteksi ketat Desktop: Dinetralkan 100% normal */
+@media (min-width: 1024px) {
+  [data-apple-fade] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+/* Aksesibilitas: Preferensi reduced motion langsung tampil tanpa animasi */
+@media (prefers-reduced-motion: reduce) {
+  [data-apple-fade] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}

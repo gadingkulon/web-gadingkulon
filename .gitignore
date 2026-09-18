@@ -1,0 +1,8 @@
+
+
+# Data pendataan yang SUNGGUHAN. Yang ikut repo cuma `data-penduduk-contoh.xlsx`
+# (isinya karangan, dibangkitkan `backend/tools/buat_data_contoh.py`). Berkas
+# Excel asli dari desa berisi 385-an nama, tempat & tanggal lahir, pekerjaan —
+# satu commit menaruhnya di riwayat git secara permanen, persis alasan
+# `backend/.gitignore` menolak file `.db`.
+docs/data-penduduk.xlsx

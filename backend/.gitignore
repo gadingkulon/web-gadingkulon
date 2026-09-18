@@ -1,0 +1,22 @@
+
+# Virtualenv & bytecode
+.venv/
+__pycache__/
+*.py[cod]
+
+# Konfigurasi lokal (berisi JWT_SECRET & password ADMIN pertama)
+.env
+.env.*
+
+
+# Basis data SQLite — TIDAK PERNAH ikut repo.
+# Isinya data kependudukan sungguhan: nama, tempat & tanggal lahir, pekerjaan,
+# alamat, plus hash password akun pengurus dan token sesi yang sedang berjalan.
+# Satu commit menaruh semua itu di riwayat git secara permanen, dan riwayat git
+# tidak bisa dibersihkan setengah-setengah.
+/data/*
+!/data/uploads/
+*.db
+*.db-wal
+*.db-shm
+*.db-info
